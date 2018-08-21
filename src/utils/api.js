@@ -10,10 +10,17 @@ const create = (baseURL = 'https://jsonplaceholder.typicode.com/') => {
 	});
 
 	const GET_USERS = () => api.get('users');
+  const GET_ID_USERS = ({userId}) => api.get(`users/${userId}`);
+  const GET_ID_USER_ALBUMS = ({userId}) => api.get(`albums?userId=${userId}`);
+  const GET_ID_USER_POSTS = ({userId}) => api.get(`posts?userId=${userId}`);
+
 
 	return {
 		api,
 		GET_USERS,
+    GET_ID_USERS,
+    GET_ID_USER_ALBUMS,
+    GET_ID_USER_POSTS
 	};
 };
 

@@ -7,6 +7,9 @@ const S_Menu = styled(Menu)`
     border-radius: 0px;
     margin-bottom: 0px;
     margin-top: 0px;
+    width: 100%;
+    position: fixed;
+    z-index: 2;
   }
 `;
 

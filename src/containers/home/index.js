@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as usersActions from '../../actions/users';
+import {usersRequest} from '../../actions/users';
 import ListUser from "./module/ListUser";
 
 class Home extends Component {
@@ -19,11 +19,15 @@ class Home extends Component {
 
 const mapStateToProps = ({users}) => ({
   loading: users.fetching,
-  users: users.payload
+  users: users.payload.list
 });
 
-const mapDispatchToProps = dispatch => ({
-  dispatchGetUser: bindActionCreators(usersActions.usersRequest, dispatch),
-});
+
+const mapDispatchToProps = dispatch => (
+  bindActionCreators({
+    dispatchGetUser: () => usersRequest({method: 'GET'})
+  }, dispatch)
+);
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

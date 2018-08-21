@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 class ListUser extends Component {
   _userClick = (user) => () => {
     this.props.history.push({
-      pathname: `/user/${user.id}`
+      pathname: `/user/${user.id}/posts`
     })
   };
 
