@@ -19,4 +19,5 @@ export default handleActions({
 	fetching: null,
 	error: null,
 	message: null,
+  payload: null
 });
