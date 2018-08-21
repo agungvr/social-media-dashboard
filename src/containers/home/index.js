@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
-import logo from '../../assets/img/logo.svg';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as usersActions from '../../actions/users';
 
 class App extends Component {
+	componentDidMount(){
+		this.props.dispatchGetUser();
+	}
+
 	render() {
 		return (
 			<div className="App">
-				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
-					<h1 className="App-title">Welcome to asu</h1>
-				</header>
 				<p className="App-intro">
-					To get started, edit <code>src/App.js</code> and save to reload.
+					Agung Ganteng
 				</p>
 			</div>
 		);
 	}
 }
 
-export default App;
+const mapStateToProps = ({ users }) => ({ users });
+
+const mapDispatchToProps = dispatch => ({
+	dispatchGetUser: bindActionCreators(usersActions.usersRequest, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
