@@ -1,20 +1,25 @@
 import React from 'react'
-import {Button, Card, Image, Icon} from 'semantic-ui-react'
+import {Button, Card, Image, Icon, Comment, Form, Header} from 'semantic-ui-react'
+import Comments from './Comments';
 
 export const Post = ({posts, onClick}) => (
-  <Card style={{width: '30%'}}>
+  <Card style={{width: '70%'}}>
     <Card.Content>
-      <Image floated='right' size='mini'
-             src='https://i1.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1'/>
-      <Card.Header style={{fontSize: 14}}>
-        {posts.title}
+      <Card.Header style={{color: '#00b5ad'}}>
+        {posts.title.toUpperCase()}
       </Card.Header>
-      <Card.Meta style={{fontSize: 12, marginTop: 10}}>
+      <Card.Description style={{marginTop: 10}}>
         {posts.body}
-      </Card.Meta>
+      </Card.Description>
     </Card.Content>
     <Card.Content extra>
-
+      <a>
+        <Icon name='comments'/>
+        Comment
+      </a>
+    </Card.Content>
+    <Card.Content extra>
+      <Comments postsId={posts.id}/>
     </Card.Content>
   </Card>
 );

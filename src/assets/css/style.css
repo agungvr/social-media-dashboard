@@ -6,8 +6,12 @@
   justify-content: center;
 }
 
-.j-c-c {
+.j-c-s {
   justify-content: flex-start;
+}
+
+.j-c-e {
+  justify-content: flex-end;
 }
 
 .a-i-c {

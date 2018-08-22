@@ -5,6 +5,7 @@ import {
   postsFailure,
 } from '../actions/posts';
 import {userDetailsRequest} from "../actions/app";
+import {commentsRequestAsyncSaga} from "./comments";
 
 export function* postsRequestAsyncSaga(api, actions) {
   const {method, data} = actions.payload;

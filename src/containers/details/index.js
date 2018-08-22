@@ -8,7 +8,7 @@ import BackButton from "../../components/BackButton";
 import MenuDetails from './module/Menu';
 import {Route, Switch} from 'react-router-dom';
 import PostsWrapper from "../posts";
-import {Albums} from "./module/Albums";
+import AlbumsWrapper from "../albums";
 
 class Details extends Component {
   constructor(props) {
@@ -26,7 +26,6 @@ class Details extends Component {
   render() {
     const activeItem = this.props.path.split('/')[3];
     const {loading, user} = this.props;
-    console.log(loading)
     return (
       <div className="w-100">
         <BackButton path={'/'}/>
@@ -41,7 +40,7 @@ class Details extends Component {
 
             <Switch>
               <Route path="/user/:id/posts" component={PostsWrapper}/>
-              <Route path="/user/:id/albums" component={Albums}/>
+              <Route path="/user/:id/albums" component={AlbumsWrapper}/>
             </Switch>
 
           </Grid.Column>

@@ -3,15 +3,15 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Button, Card, Image, Segment, Dimmer, Loader} from 'semantic-ui-react'
 import {usersRequest} from '../../actions/users';
-import ListPost from './module/ListPost';
+import ListAlbum from './module/ListAlbum';
 
-class PostsWrapper extends Component {
+class AlbumsWrapper extends Component {
   componentDidMount() {
 
   }
 
   render() {
-    const {loading, posts} = this.props;
+    const {loading, albums} = this.props;
     return (
       <div>
         {
@@ -23,16 +23,16 @@ class PostsWrapper extends Component {
           </Segment>
         }
         {
-          loading === false && posts && <ListPost posts={posts}/>
+          loading === false && albums && <ListAlbum albums={albums}/>
         }
       </div>
     );
   }
 }
 
-const mapStateToProps = ({posts}) => ({
-  loading: posts.fetching,
-  posts: posts.payload.list
+const mapStateToProps = ({albums}) => ({
+  loading: albums.fetching,
+  albums: albums.payload.list
 });
 
 
@@ -43,4 +43,4 @@ const mapDispatchToProps = dispatch => (
 );
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostsWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumsWrapper);
