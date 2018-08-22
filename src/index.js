@@ -7,6 +7,7 @@ import rootReducer from './reducers';
 import rootSaga from './sagas';
 import registerServiceWorker from './registerServiceWorker';
 import 'semantic-ui-css/semantic.min.css';
+import 'react-notifications/lib/notifications.css';
 import './assets/css/style.css'
 
 const store = configureStore(rootReducer, rootSaga);

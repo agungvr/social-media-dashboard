@@ -13,10 +13,20 @@ export const Post = ({posts, onClick}) => (
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
-      <a>
-        <Icon name='comments'/>
-        Comment
-      </a>
+      <div className="d-flex j-c-e">
+        <div className="m-r-20">
+          <a>
+            <Icon name='pencil'/>
+            Edit
+          </a>
+        </div>
+        <div>
+          <a>
+            <Icon name='trash'/>
+            Delete
+          </a>
+        </div>
+      </div>
     </Card.Content>
     <Card.Content extra>
       <Comments postsId={posts.id}/>

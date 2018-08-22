@@ -14,7 +14,9 @@ const create = (baseURL = 'https://jsonplaceholder.typicode.com/') => {
   const GET_ID_USER_ALBUMS = ({userId}) => api.get(`albums?userId=${userId}`);
   const GET_ID_USER_POSTS = ({userId}) => api.get(`posts?userId=${userId}`);
   const GET_ID_USER_POSTS_COMMENTS = ({postsId}) => api.get(`posts/${postsId}/comments`);
+  const GET_ID_USER_ALBUM_PHOTOS = ({albumId}) => api.get(`photos?albumId=${albumId}`);
 
+  const POST_USER_POSTS = (payload) => api.post(`posts`, payload);
 
 	return {
 		api,
@@ -22,7 +24,9 @@ const create = (baseURL = 'https://jsonplaceholder.typicode.com/') => {
     GET_ID_USERS,
     GET_ID_USER_ALBUMS,
     GET_ID_USER_POSTS,
-    GET_ID_USER_POSTS_COMMENTS
+    GET_ID_USER_POSTS_COMMENTS,
+    GET_ID_USER_ALBUM_PHOTOS,
+    POST_USER_POSTS
 	};
 };
 

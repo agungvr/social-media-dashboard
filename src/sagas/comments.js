@@ -4,9 +4,6 @@ import {
   commentsSuccess,
   commentsFailure,
 } from '../actions/comments';
-import {postsSuccess} from "../actions/posts";
-
-const getPostsList = (state) => state.posts.payload.list;
 
 export function* commentsRequestAsyncSaga(api, actions) {
   const {postsId} = actions.payload;

@@ -20,10 +20,15 @@ class Comments extends Component {
             comments[postsId].map((x, i) =>
               <div key={`index-${i}`} className="m-b-20">
                 <Comment>
-                  <Comment.Avatar as='a' src='https://www.yourfirstpatient.com/assets/default-user-avatar-thumbnail@2x-ad6390912469759cda3106088905fa5bfbadc41532fbaa28237209b1aa976fc9.png'/>
+                  <Comment.Avatar as='a'
+                                  src='https://www.yourfirstpatient.com/assets/default-user-avatar-thumbnail@2x-ad6390912469759cda3106088905fa5bfbadc41532fbaa28237209b1aa976fc9.png'/>
                   <Comment.Content>
                     <Comment.Author as='a' style={{color: '#7c87f4'}}>{x.email}</Comment.Author>
                     <Comment.Text>{x.body}</Comment.Text>
+                    <Comment.Actions>
+                      <Comment.Action>Edit</Comment.Action>
+                      <Comment.Action>Delete</Comment.Action>
+                    </Comment.Actions>
                   </Comment.Content>
                 </Comment>
               </div>
@@ -32,7 +37,9 @@ class Comments extends Component {
 
           <Form reply>
             <Form.TextArea style={{height: 70}}/>
-            <Button size="mini" content='Add Reply' labelPosition='left' icon='edit' color="teal"/>
+            <div className="d-flex j-c-e">
+              <Button size="mini" content='Add Reply' labelPosition='left' icon='edit' color="teal"/>
+            </div>
           </Form>
         </Comment.Group>
       </div>

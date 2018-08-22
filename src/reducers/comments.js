@@ -4,7 +4,6 @@ import {
   commentsSuccess,
   commentsFailure,
 } from '../actions/comments';
-import {userDetailsRequest} from "../actions/app";
 
 const initialState = {
   fetching: null,
@@ -15,7 +14,6 @@ const initialState = {
 
 export default handleActions(
   {
-    [userDetailsRequest]: (state) => ({...state, fetching: true}),
     [commentsRequest]: (state) => ({...state, fetching: true}),
     [commentsSuccess]: (state, actions) => {
       const {result, postsId} = actions.payload;

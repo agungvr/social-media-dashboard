@@ -1,27 +1,25 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Button, Card, Image, Segment, Dimmer, Loader} from 'semantic-ui-react'
+import {Segment, Dimmer, Loader} from 'semantic-ui-react'
 import {usersRequest} from '../../actions/users';
 import ListPost from './module/ListPost';
+import AddPost from './module/AddPost'
 
 class PostsWrapper extends Component {
-  componentDidMount() {
-
-  }
-
   render() {
-    const {loading, posts} = this.props;
+    const {loading, posts, match} = this.props;
     return (
       <div>
         {
           loading &&
-          <Segment style={{height: '70vh', marginRight: 50}}>
+          <Segment style={{width: '70%', height: '50vh', marginRight: 50}}>
             <Dimmer active inverted>
               <Loader>Loading</Loader>
             </Dimmer>
           </Segment>
         }
+        <AddPost userId={match.params.id}/>
         {
           loading === false && posts && <ListPost posts={posts}/>
         }
