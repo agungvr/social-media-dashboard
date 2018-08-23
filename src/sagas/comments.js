@@ -6,13 +6,13 @@ import {
 } from '../actions/comments';
 
 export function* commentsRequestAsyncSaga(api, actions) {
-  const {postsId} = actions.payload;
-  const response = yield call(api.GET_ID_USER_POSTS_COMMENTS, {postsId});
+  const {method, data} = actions.payload;
+  const response = yield call(api[`${method}_USER_POSTS_COMMENTS`], data);
   if (response.ok) {
     const result = {
       data: response.data
     };
-    yield put(commentsSuccess({result, postsId}));
+    yield put(commentsSuccess({result, data, method}));
   } else {
     yield put(commentsFailure());
   }

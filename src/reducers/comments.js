@@ -16,13 +16,22 @@ export default handleActions(
   {
     [commentsRequest]: (state) => ({...state, fetching: true}),
     [commentsSuccess]: (state, actions) => {
-      const {result, postsId} = actions.payload;
-      return {
-        fetching: false, error: false, message: actions.message,
-        payload: {
-          ...state.payload,
-          [postsId]: result.data
-        }
+      const {result, data, method} = actions.payload;
+      switch (method){
+        case 'GET_ID':
+          return {
+            fetching: false, error: false, message: actions.message,
+            payload: {
+              ...state.payload,
+              [data.postsId]: result.data
+            }
+          };
+          break;
+        default:
+          return {
+            ...state, fetching: false, error: false, message: actions.message,
+          };
+          break;
       }
     },
     [commentsFailure]: (state, actions) => ({
