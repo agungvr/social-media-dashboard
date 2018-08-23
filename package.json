@@ -2,6 +2,10 @@
   "name": "social-media-dashboard",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "4.6.1",
+    "node": "8.11.2"
+  },
   "dependencies": {
     "apisauce": "^0.16.0",
     "react": "^16.4.2",

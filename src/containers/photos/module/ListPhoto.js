@@ -4,17 +4,12 @@ import {Photo} from "./Photo";
 import {withRouter} from "react-router-dom";
 
 class ListPhoto extends Component {
-  _photoClick = (user) => (e) => {
-    e.preventDefault();
-    console.log(user)
-  };
-
   _renderContent = (photos) => {
     return (
       <Card.Group itemsPerRow={3}>
         {
           photos.map((item, i) =>
-            <Photo key={`index-${i}`} photo={item} onClick={this._photoClick}/>
+            <Photo key={`index-${i}`} photo={item}/>
           )
         }
       </Card.Group>

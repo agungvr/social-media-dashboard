@@ -5,7 +5,7 @@ import { LazyImage } from "react-lazy-images";
 export const Photo = ({photo, onClick}) => (
   <Card>
     <Modal trigger={
-      <a href="#" onClick={onClick(photo)} style={{paddingTop: 5, paddingRight: 5, paddingLeft: 5}}>
+      <a href="#" style={{paddingTop: 5, paddingRight: 5, paddingLeft: 5}}>
         <LazyImage
           style={{width: '100%', height: '100%'}}
           src={photo.thumbnailUrl}
