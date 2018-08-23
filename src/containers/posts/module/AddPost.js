@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import {NotificationContainer, NotificationManager} from 'react-notifications';
-import {Button, Card, Image, Icon, Comment, Form, Header} from 'semantic-ui-react'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {Button, Card, Image, Icon, Comment, Form, Header} from 'semantic-ui-react'
 import {postsRequest} from "../../../actions/posts";
 
 class AddPost extends Component {
@@ -88,10 +88,9 @@ const mapStateToProps = ({posts}) => ({
   posts: posts.payload
 });
 
-
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    dispatchAddPost: (payload) => postsRequest({method: 'POST', payload}),
+    dispatchAddPost: (data) => postsRequest({method: 'POST', data}),
     dispatchGetPost: (data) => postsRequest({method: 'GET_ID', data})
   }, dispatch)
 );

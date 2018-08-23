@@ -30,6 +30,7 @@ class PostsWrapper extends Component {
 
 const mapStateToProps = ({posts}) => ({
   loading: posts.fetching,
+  error: posts.error,
   posts: posts.payload.list
 });
 

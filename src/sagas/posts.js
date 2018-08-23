@@ -12,7 +12,7 @@ export function* postsRequestAsyncSaga(api, actions) {
   const response = yield call(api[`${method}_USER_POSTS`], data);
   if (response.ok) {
     const result = {
-      data: method === "GET_ID" ? response.data : [],
+      data: response.data,
       method
     };
     yield put(postsSuccess(result));

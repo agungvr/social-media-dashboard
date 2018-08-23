@@ -2,13 +2,69 @@ import React, {Component} from 'react'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {commentsRequest} from "../../../actions/comments";
-import {Button, Segment, Dimmer, Loader, Comment, Form} from 'semantic-ui-react'
+import {Button, Modal, Segment, Dimmer, Loader, Comment, Form} from 'semantic-ui-react'
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 
 class Comments extends Component {
+  constructor(props) {
+    super(props);
+    this.withBlocking = false;
+    this.state = {
+      body: '',
+      editText: ''
+    };
+  }
+
   componentDidMount() {
     const {dispatchGetComments, postsId} = this.props;
-    dispatchGetComments(postsId);
+    const data = {postsId};
+    dispatchGetComments(data);
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.withBlocking === true && nextProps.loading === false) {
+      if (nextProps.error === false) {
+        setTimeout(() => {
+          NotificationManager.success('Success');
+        }, 500);
+        this.withBlocking = false;
+        this.setState({body: ''})
+      } else {
+        NotificationManager.error('Error');
+      }
+    }
+  }
+
+  _commentClick = () => {
+    if (this.state.body !== '') {
+      const data = {
+        body: this.state.body
+      };
+      this.props.dispatchAddComments(data);
+      this.withBlocking = true;
+    } else {
+      NotificationManager.error('Please insert comment field!', 'Alert');
+    }
+  };
+
+  _deleteComment = commentId => e => {
+    const data = {
+      commentId
+    };
+    this.props.dispatchAddComments(data);
+    this.withBlocking = true;
+  };
+
+  _editComment = commentId => e => {
+    const data = {
+      commentId,
+      payload: {
+        body: this.state.editText
+      }
+    };
+    this.props.dispatchEditComments(data);
+    this.withBlocking = true;
+  };
 
   render() {
     const {loading, comments, postsId} = this.props;
@@ -26,8 +82,27 @@ class Comments extends Component {
                     <Comment.Author as='a' style={{color: '#7c87f4'}}>{x.email}</Comment.Author>
                     <Comment.Text>{x.body}</Comment.Text>
                     <Comment.Actions>
-                      <Comment.Action>Edit</Comment.Action>
-                      <Comment.Action>Delete</Comment.Action>
+                      <Modal onOpen={() => this.setState({editText: x.body})} size='tiny' trigger={
+                        <Comment.Action>Edit</Comment.Action>
+                      }>
+                        <Modal.Content image>
+                          <Modal.Description>
+                            <Form reply>
+                              <Form.Field>
+                                <label>Comments</label>
+                                <Form.TextArea style={{height: 100}}
+                                               onChange={(e) => this.setState({editText: e.target.value})}
+                                               value={this.state.editText}/>
+                              </Form.Field>
+                              <div className="d-flex j-c-e">
+                                <Button size="tiny" content='Edit' labelPosition='left' icon='edit' color="teal"
+                                        onClick={this._editComment(x.id)}/>
+                              </div>
+                            </Form>
+                          </Modal.Description>
+                        </Modal.Content>
+                      </Modal>
+                      <Comment.Action onClick={this._deleteComment(x.id)}>Delete</Comment.Action>
                     </Comment.Actions>
                   </Comment.Content>
                 </Comment>
@@ -36,9 +111,11 @@ class Comments extends Component {
           }
 
           <Form reply>
-            <Form.TextArea style={{height: 70}}/>
+            <Form.TextArea style={{height: 70}} value={this.state.body}
+                           onChange={(e) => this.setState({body: e.target.value})}/>
             <div className="d-flex j-c-e">
-              <Button size="mini" content='Add Reply' labelPosition='left' icon='edit' color="teal"/>
+              <Button onClick={this._commentClick} size="mini" content='Add Reply' labelPosition='left' icon='edit'
+                      color="teal"/>
             </div>
           </Form>
         </Comment.Group>
@@ -49,13 +126,17 @@ class Comments extends Component {
 
 const mapStateToProps = ({comments}) => ({
   loading: comments.fetching,
+  error: comments.error,
   comments: comments.payload
 });
 
 
 const mapDispatchToProps = dispatch => (
   bindActionCreators({
-    dispatchGetComments: (postsId) => commentsRequest({method: 'GET', postsId})
+    dispatchGetComments: (data) => commentsRequest({method: 'GET_ID', data}),
+    dispatchAddComments: (data) => commentsRequest({method: 'POST', data}),
+    dispatchEditComments: (data) => commentsRequest({method: 'PUT', data}),
+    dispatchDeleteComments: (data) => commentsRequest({method: 'DELETE', data})
   }, dispatch)
 );
 
